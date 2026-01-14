@@ -10,27 +10,18 @@
 #include <cstdint>
 
 #include "RecogLibCApi.h"
+#include "ZenidEnums.generated.h"
 
 
 namespace RecogLibC RECOGLIBC_PUBLIC
 {
 
-enum class SdkLivenessSteps
-{
-  UpPerspective = 0,
-  Left = 1,
-  Right = 2,
-  Down = 3,
-  Smile = 4,
-  Blinking = 5,
-  UpObsolete = 6,
-};
-
 class SelfieLivenessSdkValidatorConfig
 {
 public:
   std::vector<std::vector<SdkLivenessSteps>> RandomSequences;
-  inline static float SmileThreshold = 0.82f;
+  inline static float SmileThreshold = 0.65f;
+  inline static float NoSmileThreshold = 0.4f;
   int ScoreStep = 100;
   std::vector<SdkLivenessSteps> AllowedSteps;
   bool StepUpPerspective = true;
@@ -43,13 +34,13 @@ public:
   int StepCount = 4;
   bool LostFaceResets = true;
   bool ReCheckFrontend = false;
+  int RandomSequencesCount = 50;
   int AcceptScore = 100;
   bool IsTestEnabled = true;
 };
 class NfcValidatorConfig
 {
 public:
-  int NfcChipReadingTimeoutSeconds = 30;
   int NumberOfReadingAttempts = 1;
   bool SkipNfcAllowed = false;
   bool NoNfcMeansError = false;
@@ -58,40 +49,30 @@ public:
   int ScoreStep = 100;
   bool IsTestEnabled = true;
 };
-class BlurValidatorConfig
-{
-public:
-  int AcceptScore = 50;
-  bool IsTestEnabled = true;
-  int ScoreStep = 1;
-};
-class SpecularImageValidatorConfig
-{
-public:
-  int AcceptScore = 50;
-  bool IsTestEnabled = true;
-  int ScoreStep = 1;
-};
 class BarcodeValidatorConfig
 {
 public:
   int ScoreStep = 100;
   bool UseOnNfcFields = false;
-  int MinFieldConfidence = 50;
+  int MinFieldConfidence = 0;
   int AcceptScore = 100;
   bool IsTestEnabled = true;
 };
 class SdkPictureQualityValidatorConfig
 {
 public:
-  int OverallTimeToMaxTolerance = 10;
-  int TimeToMaxToleranceForBlur = 10;
+  int OverallTimeToMaxTolerance = 60;
+  int TimeToMaxToleranceForBlur = 60;
   int TimeToMaxToleranceForSpecular = 10;
-  int TimeToMaxToleranceForDarkness = 10;
+  int TimeToMaxToleranceForDarkness = 60;
   int TimeToMaxToleranceForAlignment = 10;
   int TimeToMaxToleranceForBorderDistance = 10;
   int TimeToMaxToleranceForLinearFit = 5;
   int TimeToMaxToleranceForStability = 10;
+  int MinBlurriness = 30;
+  int MaxBlurriness = 50;
+  int MinSpecular = 50;
+  int MaxSpecular = 100;
   int MinDarkness = 80;
   int MaxDarkness = 100;
   int MinAlignment = 50;
@@ -122,16 +103,36 @@ public:
   bool IsTestEnabled = true;
   int ScoreStep = 1;
 };
+class MrzChecksumValidatorConfig
+{
+public:
+  int ScoreStep = 100;
+  bool EnableSdkCheck = false;
+  bool UseOnNfcFields = false;
+  int MinFieldConfidence = 0;
+  int AcceptScore = 100;
+  bool IsTestEnabled = true;
+};
+class SdkSignatureValidatorConfig
+{
+public:
+  ResponseWhenNoSignature NoSignatureHandling = ResponseWhenNoSignature::ValidatorDoesnotRun;
+  bool AcceptOfflineToken = false;
+  int TimestampDelayInSeconds = 300;
+  int ScoreStep = 100;
+  int AcceptScore = 100;
+  bool IsTestEnabled = true;
+};
 class SdkProfileConfigs
 {
 public:
   SelfieLivenessSdkValidatorConfig SelfieLivenessSdkValidatorConfig;
   NfcValidatorConfig NfcValidatorConfig;
-  BlurValidatorConfig BlurValidatorConfig;
-  SpecularImageValidatorConfig SpecularImageValidatorConfig;
   BarcodeValidatorConfig BarcodeValidatorConfig;
   SdkPictureQualityValidatorConfig SdkPictureQualityValidatorConfig;
   IQSHologramValidatorConfig IQSHologramValidatorConfig;
+  MrzChecksumValidatorConfig MrzChecksumValidatorConfig;
+  SdkSignatureValidatorConfig SdkSignatureValidatorConfig;
 };
 class SdkMasterConfig
 {
@@ -140,82 +141,10 @@ public:
   std::string DefaultProfile;
   std::string NfcStringToSign = "";
 };
-enum class PlatformKind
-{
-  Web = 0,
-  Android = 1,
-  iOS = 2,
-};
-
-enum class ValidatorType
-{
-  LowConfidence = 1,
-  BirthDateMrz = 2,
-  IssueAndExpiry = 3,
-  BirthNumber = 4,
-  Specular = 5,
-  Selfie = 6,
-  Kerning = 7,
-  VerticalAlignment = 8,
-  FontShape = 9,
-  Holo = 11,
-  Dpi = 15,
-  SelfieLiveness = 17,
-  Exif = 18,
-  IdCardRecalled = 19,
-  FaceSex = 20,
-  Moire = 21,
-  Barcode = 22,
-  DocumentComplete = 23,
-  FirstNameMrz = 24,
-  LastNameMrz = 25,
-  ExpiryDateMrz = 26,
-  SexMrz = 27,
-  IdcardNumberMrz = 28,
-  PassportNumberMrz = 29,
-  BirthNumberDateMrz = 30,
-  BirthNumberSexMrz = 31,
-  BirthNumberPassportMrz = 32,
-  MrzChecksum = 33,
-  SelfieRequired = 34,
-  FieldsAlignment = 35,
-  SelfieVideoRequired = 36,
-  FaceAge = 37,
-  RequiredFields = 38,
-  VideoCut = 40,
-  Blur = 41,
-  UnknownDocument = 43,
-  DocVideoRequired = 44,
-  DocRequired = 45,
-  IDCardNumberRange = 46,
-  Insolvency = 47,
-  DocumentsConsistency = 48,
-  PhotoColor = 49,
-  PaperGrain = 50,
-  DocumentPhoto = 51,
-  SpecularImage = 53,
-  OneFaceSeveralBirthNums = 54,
-  OneBirthNumSeveralFaces = 55,
-  FaceTilt = 56,
-  Mvsr = 57,
-  DisplayDetection = 58,
-  SdkSignature = 59,
-  VisaNumberMrz = 60,
-  MinimalAge = 61,
-  FieldManipulation = 62,
-  CardFaceManipulation = 63,
-  DamagedCard = 64,
-  MaskedFace = 65,
-  SelfieLivenessSdk = 66,
-  Nfc = 67,
-  SdkPictureQuality = 68,
-  IQSHologram = 69,
-};
-
 class ValidatorResultInfo
 {
 public:
-  std::optional<ValidatorType> ValidatorType;
+  std::optional<FrontendValidatorType> ValidatorType;
   std::string Description;
   int Score = 0;
   int ThresholdMax = 0;
@@ -228,17 +157,6 @@ public:
   std::vector<ValidatorResultInfo> ValidatorResults;
   std::string Barcode = "";
 };
-enum class DefType
-{
-  TD1_IDC = 0,
-  TD2_IDC2000 = 1,
-  TD3_PAS = 2,
-  SKDRV = 3,
-  None = 4,
-  FrenchID1988 = 5,
-  NLDRV = 6,
-};
-
 class MrzData
 {
 public:
@@ -259,6 +177,10 @@ public:
   std::optional<int> BirthNumberChecksum;
   std::optional<bool> BirthNumberVerified;
   std::optional<int> BirthDateChecksum;
+  std::string SecondaryDocumentNumber;
+  std::optional<int> SecondaryDocumentNumberChecksum;
+  std::optional<bool> SecondaryDocumentNumberVerified;
+  std::string SecondaryDocumentRole;
   std::optional<int> DocumentNumChecksum;
   std::optional<int> ExpiryDateChecksum;
   std::string IssueDate;
@@ -273,48 +195,12 @@ public:
   std::optional<std::chrono::system_clock::time_point> IssueDateParsed;
   DefType MrzDefType = DefType::TD1_IDC;
 };
-enum class DGName
-{
-  COM = 0,
-  SOD = 1,
-  DG1 = 2,
-  DG2 = 3,
-  DG3 = 4,
-  DG4 = 5,
-  DG5 = 6,
-  DG6 = 7,
-  DG7 = 8,
-  DG8 = 9,
-  DG9 = 10,
-  DG10 = 11,
-  DG11 = 12,
-  DG12 = 13,
-  DG13 = 14,
-  DG14 = 15,
-  DG15 = 16,
-  DG16 = 17,
-};
-
-enum class NfcProtocol
-{
-  PACE = 0,
-  BAC = 1,
-};
-
 class NfcData
 {
 public:
   std::unordered_map<DGName, std::string> DataGroups;
   NfcProtocol ProtocolUsed = NfcProtocol::PACE;
 };
-enum class NfcStatus
-{
-  DeviceDoesNotSupportNfc = 0,
-  InvalidNfcKey = 1,
-  UserSkipped = 2,
-  Ok = 3,
-};
-
 class Signature
 {
 public:
@@ -332,5 +218,16 @@ public:
   MrzData MrzData;
   NfcData NfcData;
   std::optional<NfcStatus> NfcStatus;
+  std::optional<DocumentCodes> DocumentCode;
+  std::optional<PageCodes> PageCode;
+  std::unordered_map<FieldID, std::string> MinedData;
+  std::string LicensePlate;
+};
+class FrontendValidationResults
+{
+public:
+  ValidatorBackendData ResultsOfFrontendValidations;
+  std::optional<DocumentCodes> DocumentCode;
+  std::optional<PageCodes> PageCode;
 };
 }

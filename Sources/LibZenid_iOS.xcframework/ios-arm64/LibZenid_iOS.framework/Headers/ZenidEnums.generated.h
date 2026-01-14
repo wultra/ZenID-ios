@@ -8,7 +8,6 @@ namespace RecogLibC
 {
 
 enum class DocumentCodes : int32_t {
-	IDC1 = 0,
 	IDC2 = 1,
 	DRV = 2,
 	PAS = 3,
@@ -17,12 +16,9 @@ enum class DocumentCodes : int32_t {
 	SK_DRV_2013 = 6,
 	SK_DRV_2015 = 7,
 	SK_PAS_2008_14 = 8,
-	SK_DRV_1993 = 10,
 	PL_IDC_2015 = 11,
 	DE_IDC_2010 = 12,
-	DE_IDC_2001 = 13,
 	HR_IDC_2013_15 = 14,
-	AT_IDE_2000 = 15,
 	HU_IDC_2000_01_12 = 16,
 	HU_IDC_2016 = 17,
 	AT_IDC_2002_05_10 = 18,
@@ -31,8 +27,6 @@ enum class DocumentCodes : int32_t {
 	AT_DRV_2006 = 21,
 	AT_DRV_2013 = 22,
 	CZ_RES_2011_14 = 23,
-	CZ_RES_2006_T = 24,
-	CZ_RES_2006_07 = 25,
 	CZ_GUN_2014 = 26,
 	HU_PAS_2006_12 = 27,
 	HU_DRV_2012_13 = 28,
@@ -77,6 +71,7 @@ enum class DocumentCodes : int32_t {
 	DE_PAS_2007 = 67,
 	DE_DRV_2013_21 = 68,
 	DE_DRV_1999_01_04_11 = 69,
+	MT_DRV_2013_20 = 70,
 	FR_IDC_2021 = 71,
 	FR_IDC_1988_94 = 72,
 	ES_PAS_2003_06 = 73,
@@ -90,6 +85,7 @@ enum class DocumentCodes : int32_t {
 	BE_IDC_2020_21 = 81,
 	GR_PAS_2020 = 82,
 	PT_PAS_2006_09 = 83,
+	NL_PAS_2024 = 84,
 	PT_IDC_2007_08_09_15 = 85,
 	SE_IDC_2012_21 = 86,
 	FI_IDC_2017_21 = 87,
@@ -123,7 +119,6 @@ enum class DocumentCodes : int32_t {
 	UA_DRV_2021 = 115,
 	EU_EHIC_2004_C = 116,
 	VN_PAS_2005 = 117,
-	NL_DRV_2006 = 118,
 	NL_DRV_2013 = 119,
 	NL_DRV_2014 = 120,
 	AL_PAS_2009 = 121,
@@ -145,8 +140,6 @@ enum class DocumentCodes : int32_t {
 	RO_IDC_2021sep = 137,
 	SK_RES_2011 = 138,
 	SK_RES_2020 = 139,
-	CZ_BIRTH_A2 = 140,
-	CZ_BIRTH_A3 = 141,
 	PL_DRV_1999_A2 = 142,
 	DE_IDC_2010_A2 = 143,
 	DE_IDC_2010_A3 = 144,
@@ -179,6 +172,16 @@ enum class DocumentCodes : int32_t {
 	US_PAS_2006 = 171,
 	JP_PAS_2013 = 172,
 	PK_PAS_2022 = 173,
+	US_NV_DRV_2021 = 174,
+	US_NV_DRV_2021minor = 175,
+	US_NV_DRV_2008_10_14 = 176,
+	MT_IDC_2020 = 177,
+	SK_PAS_2024 = 178,
+	SK_IDC_2024 = 179,
+	VN_PAS_2022_A2 = 180,
+	MD_PAS_2023 = 181,
+	BG_IDC_2024 = 182,
+	RO_PAS_2024 = 183,
 };
 
 enum class PageCodes : uint8_t {
@@ -294,7 +297,7 @@ enum class Country : uint8_t {
 	So = 104,
 	Sn = 105,
 	Gt = 106,
-	Tf = 107,
+	Td = 107,
 	Kh = 108,
 	Zw = 109,
 	Ss = 110,
@@ -457,6 +460,12 @@ enum class FaceLivenessVerifierState : int {
 	DontSmile = 8,
 };
 
+enum class LicensePlateVerifierState : int {
+	NoLicensePlateFound = 0,
+	TryingToReadLicensePlate = 1,
+	Ok = 2,
+};
+
 enum class FieldID : int {
 	A1 = 0,
 	A2 = 1,
@@ -546,7 +555,7 @@ enum class FieldID : int {
 	AlternativeName = 85,
 	VisaNumber = 86,
 	Duration = 87,
-	Type = 88,
+	VisaType = 88,
 	Count = 89,
 	NamesOfParents = 90,
 	NamesOfParents2 = 91,
@@ -563,6 +572,21 @@ enum class FieldID : int {
 	MothersSurnameBirthSurname = 102,
 	Authority3 = 103,
 	Sex2 = 104,
+	ChangeOfData = 105,
+	AgeOver15 = 106,
+	AgeOver18 = 107,
+	AgeOver21 = 108,
+	AgeOver60 = 109,
+	AgeOver65 = 110,
+	SpecialRemarks1 = 111,
+	Locality = 112,
+	Level2 = 113,
+	StreetNumber = 114,
+	HouseNumberType = 115,
+	HouseNumber = 116,
+	Street = 117,
+	Sublocality = 118,
+	LicensePlate = 119,
 };
 
 enum class SampleType : int {
@@ -572,6 +596,17 @@ enum class SampleType : int {
 	DocumentVideo = 3,
 	Archived = 4,
 	Unknown = 5,
+	EDoklad = 6,
+	LicensePlate = 7,
+};
+
+enum class SdkVerifierType : int {
+	FaceLiveness = 0,
+	Document = 1,
+	Selfie = 2,
+	Hologram = 3,
+	IQSHologram = 4,
+	LicensePlate = 5,
 };
 
 enum class SdkSignatureProblem : int {
@@ -581,6 +616,83 @@ enum class SdkSignatureProblem : int {
 	AndroidPackageNotAllowed = 3,
 	IosBundleNotAllowed = 4,
 	OfflineTokenUsed = 5,
+};
+
+enum class SdkLivenessSteps : int {
+	UpPerspective = 0,
+	Left = 1,
+	Right = 2,
+	Down = 3,
+	Smile = 4,
+	Blinking = 5,
+	UpObsolete = 6,
+};
+
+enum class ResponseWhenNoSignature : int {
+	ValidatorFails = 0,
+	ValidatorIgnores = 1,
+	ValidatorDoesnotRun = 2,
+};
+
+enum class PlatformKind : int {
+	Web = 0,
+	Android = 1,
+	iOS = 2,
+};
+
+enum class FrontendValidatorType : int {
+	Alignment = 0,
+	BorderDistance = 1,
+	LinearFit = 2,
+	Stability = 3,
+	Mrz = 4,
+	Lighting = 5,
+	Barcode = 22,
+	Blur = 41,
+	SpecularImage = 53,
+};
+
+enum class DefType : int {
+	TD1_IDC = 0,
+	TD2_IDC2000 = 1,
+	TD3_PAS = 2,
+	SKDRV = 3,
+	None = 4,
+	FrenchID1988 = 5,
+	NLDRV = 6,
+};
+
+enum class DGName : int {
+	COM = 0,
+	SOD = 1,
+	DG1 = 2,
+	DG2 = 3,
+	DG3 = 4,
+	DG4 = 5,
+	DG5 = 6,
+	DG6 = 7,
+	DG7 = 8,
+	DG8 = 9,
+	DG9 = 10,
+	DG10 = 11,
+	DG11 = 12,
+	DG12 = 13,
+	DG13 = 14,
+	DG14 = 15,
+	DG15 = 16,
+	DG16 = 17,
+};
+
+enum class NfcProtocol : int {
+	PACE = 0,
+	BAC = 1,
+};
+
+enum class NfcStatus : int {
+	DeviceDoesNotSupportNfc = 0,
+	InvalidNfcKey = 1,
+	UserSkipped = 2,
+	Ok = 3,
 };
 
 }

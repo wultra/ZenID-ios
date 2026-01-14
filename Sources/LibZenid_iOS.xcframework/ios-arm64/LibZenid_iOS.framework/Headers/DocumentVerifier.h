@@ -104,6 +104,10 @@ public:
 
 	// Only valid if the state is OK.
 	const std::vector<uint8_t>& GetSignedImage() const;
+
+	// Returns a preview of the card image intended to be shown to the user in the frontend UI.
+	// Only valid if the state is OK or NFC.
+	// Not valid in hologram mode (between BeginHologramVerification and EndHologramVerification).
 	std::vector<uint8_t> GetImagePreview() const;
 	
 	HologramState GetHologramState() const;
@@ -118,6 +122,7 @@ public:
 	std::string GetRenderCommands(const cv::Size& canvasSize, SupportedLanguages language);
 #endif
 	std::string GetRenderCommands(int canvasWidth, int canvasHeight, SupportedLanguages language);
+	const std::string GetValidatorsData() const;
 
 	void SetDebugVisualization(bool isEnabled);
 

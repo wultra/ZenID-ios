@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/DocumentVerifier.h</key>
 		<data>
-		lQvz/pJ1D6PbOef5gpMtoCxYNCY=
+		mvYqV9R8eu9gFBbq/Oqj/028q6g=
 		</data>
 		<key>Headers/FaceLivenessVerifier.h</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Headers/Image.h</key>
 		<data>
-		bnD/ZlnoBpMqNcen7lPhusaxnIM=
+		MHh+D6Jk1F8MJpN9KNnoOoTO9x0=
 		</data>
 		<key>Headers/RecogLibC.h</key>
 		<data>
@@ -42,27 +42,27 @@
 		</data>
 		<key>Headers/SerializableInterop.generated.h</key>
 		<data>
-		Op9lyZU1v7LBiwHWP0DAK3rCqvc=
+		z6drr+rQ6dzdPZucMJxCRiE10W0=
 		</data>
 		<key>Headers/Version.h</key>
 		<data>
-		5iqD9CIxWrTUuuQn379FnKrUJ6E=
+		kZCIHu6vvV1kMUxbgv9z8C1FVtY=
 		</data>
 		<key>Headers/ZenidEnums.generated.h</key>
 		<data>
-		nW3avzRUJ752JxPeGHzFYdywQxo=
+		+tGmm2vpxRK1+I3lod0gBJbNQjo=
 		</data>
 		<key>Headers/ZenidLog.h</key>
 		<data>
-		HfBZdP2eS3yz4wParKeczAS+uGY=
+		R4GhqHxdG6s3BKwNi/Lc2CPVTx8=
 		</data>
 		<key>Headers/ZenidSecurity.h</key>
 		<data>
-		ZzMPK4RKL5mcSKqFDgDFsM51tSs=
+		uF1IC8JBfxvcvwywPmjNGZ3L/rU=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		QJ/SHh8uGWNCWypeR2s3w1wWqG4=
+		a+LQ0OscXoVHuOVO1aR/A3cmtzw=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -78,7 +78,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			exoX5KWESAbMzPOSrsocRc2KOl6bMsiNKKzBdOyzKJ8=
+			vOaC9Sq/255LJrRqMtP1sVpB0idtTPgx0AgdIFbJOcY=
 			</data>
 		</dict>
 		<key>Headers/FaceLivenessVerifier.h</key>
@@ -99,7 +99,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			r3x0LyYEycsXN1kiU7xfXL0K6FUTqPWb25RFe6b9krg=
+			AR7tyPMSp3PQNLz0Pm0bEB89w7+7A5PTfKUfubVQhk8=
 			</data>
 		</dict>
 		<key>Headers/RecogLibC.h</key>
@@ -134,35 +134,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			pFoOxVQ9CqdyVMvw3uuTLuRugVuJAAvwaX9dKL9nsbY=
+			KAPa97qAUSgYgNJ318UekEJYU0N5BuPOdC6oJQSxgk4=
 			</data>
 		</dict>
 		<key>Headers/Version.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0aDZC0mejcUK5K23vM0/BVDzIeyiNeWLAn4H147VDuU=
+			OjZd0nruNz0Arupoz+bH8rka8fDmun0RFDm1tbelW0c=
 			</data>
 		</dict>
 		<key>Headers/ZenidEnums.generated.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			hrYYwpbOSSivxaHG4pQfyW7l1OaYBbraLtZi7KmdHxE=
+			BrHKwYt80YWOPYi5Aoq6NwsnkvO+N+/FDzg3IfQhJaY=
 			</data>
 		</dict>
 		<key>Headers/ZenidLog.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			hA+Vzdq5giIhjJCdgDWv9npUMB1s5ovEvus0U9xPTa4=
+			1MUhPHILWs/Z0405YPbKEZNFOpBhg/4IagNPfUs8eu8=
 			</data>
 		</dict>
 		<key>Headers/ZenidSecurity.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			QXCKp4dllCFU4iO4hexDJEWZOKT71GwMXWMmxLFYzQ8=
+			fmixelukbEgyCOazhUTq3FUGBa23/TjB3bS6tFmft90=
 			</data>
 		</dict>
 	</dict>
