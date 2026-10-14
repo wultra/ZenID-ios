@@ -9,7 +9,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "RecogLib_iOS",
-            targets: ["RecogLib_iOS"]),
+            targets: ["RecogLib_iOS", "LibZenid_iOS", "ZenIDModels"]),
         .library(
             name: "LibZenid_iOS",
             targets: ["LibZenid_iOS"]),
@@ -27,5 +27,15 @@ let package = Package(
         .binaryTarget(
             name: "LibZenid_iOS",
             path: "./Sources/LibZenid_iOS.xcframework"),
+        .target(
+            name: "ZenIDModels",
+            path: "Sources/ZenIDModels",
+            resources: [
+                .copy("usurf_idc2_b.bin"),
+                .copy("usurf_idc2_f.bin"),
+                .copy("usurf_pas_f.bin"),
+                .copy("usurf_drv_f.bin"),
+                .copy("modelhashes.bin")
+            ]),
     ]
 )
